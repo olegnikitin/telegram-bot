@@ -1,0 +1,48 @@
+{
+  "modules": {
+    "config": {
+      "module": "../../../../modules/config"
+    },
+    "bot": {
+      "module": "../../../../index.js",
+      "dependencies": [ "config", "tbot-datasource", "currency_profile_factory" ],
+      "parameters": {
+        "impl": "telegraf-impl"
+      }
+    },
+    "tbot-datasource": {
+      "module": "../../../../index.js",
+      "dependencies": [ "config", "currency_profile_factory", "cexClient", "redis_putil" ],
+      "parameters": {
+        "impl": "bot-datasource"
+      }
+    },
+    "currency_profile_factory": {
+      "module": "../../../../index.js",
+      "dependencies": [
+        "config"
+      ],
+      "parameters": {
+        "impl": "remote-cp-impl"
+      }
+    },
+    "cexClient": {
+      "module": "../../../../http_client_factory",
+      "dependencies": [
+        "config"
+      ],
+      "parameters": {
+        "impl": "telegramBotClient"
+      }
+    },
+    "redis_putil": {
+      "module": "../../../../modules/redis_manager",
+      "dependencies": [
+        "config"
+      ],
+      "parameters": {
+        "configProperty": "redis_putil"
+      }
+    }
+  }
+}

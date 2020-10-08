@@ -1,0 +1,55 @@
+include: 'https://gitlab.wnb:28443/pub/gitlab-pipelines/raw/master/common.yml'
+image: node:10
+
+stages:
+  - test
+  - build
+  - deploy
+
+test:unit:
+  stage: test
+  script:
+  - echo "TBD"
+
+build:dev:
+  image: docker:stable
+  stage: build
+  script:
+    - docker_build dev push # regostry commitType
+  only:
+    - dev
+
+build:release:
+  image: docker:stable
+  stage: build
+  script:
+    - docker_build release push # regostry commitType
+  only:
+    - master
+
+deploy:dev:
+  stage: deploy
+  image: harbor.infra.kube/infra/helm
+  variables:
+    HELM_ARGS: "--namespace cex-dev --tiller-namespace cex-dev"
+  script:
+    - deploy dev push dev # registry commitType context
+  environment:
+    name: dev
+  only:
+    - dev
+    
+deploy:prod:
+  stage: deploy
+  image: harbor.infra.kube/infra/helm
+  variables:
+    HELM_ARGS: "--namespace cex-prod --tiller-namespace cex-prod"
+  tags:
+   - cex-prod
+  script:
+    - deploy release push prodgnr # registry commitType context
+  when: manual
+  environment:
+    name: prodgnr
+  only:
+    - master

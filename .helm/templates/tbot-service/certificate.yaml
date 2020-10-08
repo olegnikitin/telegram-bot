@@ -1,0 +1,12 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: certificate-{{ template "service.fullname" . }}-service
+spec:
+  secretName: certificate-{{ template "service.fullname" . }}-service
+  issuerRef:
+    name: ca-issuer
+    # We can reference ClusterIssuers by changing the kind here.
+    # The default value is Issuer (i.e. a locally namespaced Issuer)
+    kind: ClusterIssuer
+  commonName: {{ template "service.fullname" . }}-service

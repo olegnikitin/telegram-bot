@@ -1,0 +1,44 @@
+{
+  "name": "telegram-bot",
+  "version": "1.0.1",
+  "description": "Telegram Bot",
+  "main": "run-tbot.js",
+  "homepage": "https://cex.io",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@gitlab.wnb:2288/cex/tlgbp.git"
+  },
+  "keywords": [
+    "Telegram",
+    "Bot"
+  ],
+  "author": "CEX.IO Ltd.",
+  "license": "ISC",
+  "engines": {
+    "node": ">=8.9.1"
+  },
+  "dependencies": {
+    "@cex-static/tbot-templates": "~1.0.22",
+    "@google/chatbase": "^1.1.2",
+    "@cex/initialization-context": "^1.0.1",
+    "log4js": "~0.6.8",
+    "node-cron": "^2.0.3",
+    "node-watch": "^0.6.0",
+    "q": "^1.5.1",
+    "telegraf": "^3.27.1",
+    "telegraf-i18n": "^6.5.0",
+    "telegraf-session-redis": "^5.1.0",
+    "underscore": "^1.9.1"
+  },
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "mockery": "^2.1.0"
+  }
+}

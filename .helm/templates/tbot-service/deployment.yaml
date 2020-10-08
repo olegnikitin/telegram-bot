@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ template "service.name" . }}
+    service: tbot-service
+  name: {{ template "service.fullname" . }}-service
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: {{ template "service.name" . }}
+        service: tbot-service
+    spec:
+      containers:
+      - image: {{.Values.repository}}:{{.Values.version}}
+        command: ['node', 'run-tbot.js']
+        name: {{ template "service.fullname" . }}-service
+        volumeMounts:
+        - name: config
+          mountPath: /app/config
+          readOnly: true
+        - name: certs
+          mountPath: /app/config/ssl
+          readOnly: true
+        env:
+        - name: APP_CONF
+          value: /app/config/
+        - name: NODE_TLS_REJECT_UNAUTHORIZED
+          value: {{.Values.reject_unauthorized | quote }}
+        - name: VERSION
+          value: {{.Values.version | quote }}
+      volumes:
+      - name: config
+        configMap:
+          name: {{ template "service.fullname" . }}
+      - name: certs
+        secret:
+          secretName: certificate-{{ template "service.fullname" . }}-service

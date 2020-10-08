@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  tbot-service:
+    build: . 
+    volumes:
+      - $HOME/app/conf/tlgbp/dev:/app/conf/tlgbp/dev
+    command: node run-tbot.js
+    environment:
+      - APP_CONF=/app/conf/tlgbp/dev
+      - NODE_TLS_REJECT_UNAUTHORIZED=0
+      - COMMIT
+  tbot-sender-service:
+    build: .
+    volumes:
+      - $HOME/app/conf/tlgbp/dev:/app/conf/tlgbp/dev
+    command: node run-tbot-sender.js
+    environment:
+      - APP_CONF=/app/conf/tlgbp/dev
+      - NODE_TLS_REJECT_UNAUTHORIZED=0
+      - COMMIT
+

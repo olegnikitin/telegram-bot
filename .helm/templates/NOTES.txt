@@ -1,0 +1,3 @@
+Please wait for several minutes for deployment to complete.
+
+Version {{ .Values.version }}

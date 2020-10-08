@@ -1,0 +1,12 @@
+name: tlgbp
+version: 1.0.0
+appVersion: 1.0.0
+description: Telegram bot
+keywords:
+- cex
+sources:
+- https://gitlab.wnb:28443/cex/tlgbp
+maintainers:
+- name: CEX Mobile Team
+  email: cex@wnb.com.ua
+engine: gotpl
